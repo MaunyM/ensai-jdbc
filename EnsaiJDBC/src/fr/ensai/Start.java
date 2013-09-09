@@ -1,12 +1,12 @@
-package fr.mma;
+package fr.ensai;
 
 import java.sql.SQLException;
 
-import fr.mma.outils.Connexion;
-import fr.mma.outils.DAO;
-import fr.mma.outils.LivreDAO;
-import fr.mma.outils.SGBD;
-import fr.mma.outils.model.Livre;
+import fr.ensai.outils.Connexion;
+import fr.ensai.outils.DAO;
+import fr.ensai.outils.LivreDAO;
+import fr.ensai.outils.SGBD;
+import fr.ensai.outils.model.Livre;
 
 
 public class Start {

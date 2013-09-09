@@ -1,4 +1,4 @@
-package fr.mma.outils.exception;
+package fr.ensai.outils.exception;
 
 public class ConnexionException extends Exception {
 

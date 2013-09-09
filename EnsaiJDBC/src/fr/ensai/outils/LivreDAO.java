@@ -1,10 +1,10 @@
-package fr.mma.outils;
+package fr.ensai.outils;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import fr.mma.outils.model.Livre;
+import fr.ensai.outils.model.Livre;
 
 public class LivreDAO extends DAO<Livre> {
 

@@ -1,4 +1,4 @@
-package fr.mma.outils;
+package fr.ensai.outils;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -10,8 +10,8 @@ import java.util.List;
 public abstract class SGBD {
 
 	/**
-	 * Cette méthode vous permet de récupérer les descriptions des tables présentes dans votre base.
-	 * @return les différentes lignes de la table pg_tables, constituées de 7 valeurs. 
+	 * Cette mï¿½thode vous permet de rï¿½cupï¿½rer les descriptions des tables prï¿½sentes dans votre base.
+	 * @return les diffï¿½rentes lignes de la table pg_tables, constituï¿½es de 7 valeurs. 
 	 * @throws SQLException 
 	 */
 	public static List<List<Object>> getTables() throws SQLException{
@@ -19,11 +19,11 @@ public abstract class SGBD {
 	}
 
 	/**
-	 * Cette méthode vous permet de récupérer les lignes de la table nom présente dans votre base. 
-	 * @param nom : le nom de la table à consulter (ex : METIER)
-	 * @param taille : le nombre de colonnes à retourner. si taille vaut 3, les 3 premières colonnes seront retournées. 
-	 * @return les différentes lignes de la table nom, constituées de taille valeurs.
-	 * Dans le cadre de votre projet, vous pourrez utiliser les méthodes prédéfinies afin de mieux contrôler vos types de données 
+	 * Cette mï¿½thode vous permet de rï¿½cupï¿½rer les lignes de la table nom prï¿½sente dans votre base. 
+	 * @param nom : le nom de la table ï¿½ consulter (ex : METIER)
+	 * @param taille : le nombre de colonnes ï¿½ retourner. si taille vaut 3, les 3 premiï¿½res colonnes seront retournï¿½es. 
+	 * @return les diffï¿½rentes lignes de la table nom, constituï¿½es de taille valeurs.
+	 * Dans le cadre de votre projet, vous pourrez utiliser les mï¿½thodes prï¿½dï¿½finies afin de mieux contrï¿½ler vos types de donnï¿½es 
 	 * exemple :  res.getInt(columnIndex);  res.getString(columnIndex);
 	 * exemple de requete : SELECT * FROM METIER
 	 * @throws SQLException 
@@ -33,12 +33,12 @@ public abstract class SGBD {
 	}
 
 	/**
-	 * Cette méthode vous permet de récupérer les lignes de la table nom présente dans votre base. 
-	 * @param nom : le nom de la table à consulter (ex : METIER)
-	 * @param taille : le nombre de colonnes à retourner. si taille vaut 3, les 3 premières colonnes seront retournées. 
-	 * @param contrainte : une clause WHERE complète, avec le mot clé WHERE, pouvant être complètement vide
-	 * @return les différentes lignes de la table nom, constituées de taille valeurs.
-	 * Dans le cadre de votre projet, vous pourrez utiliser les méthodes prédéfinies afin de mieux contrôler vos types de données 
+	 * Cette mï¿½thode vous permet de rï¿½cupï¿½rer les lignes de la table nom prï¿½sente dans votre base. 
+	 * @param nom : le nom de la table ï¿½ consulter (ex : METIER)
+	 * @param taille : le nombre de colonnes ï¿½ retourner. si taille vaut 3, les 3 premiï¿½res colonnes seront retournï¿½es. 
+	 * @param contrainte : une clause WHERE complï¿½te, avec le mot clï¿½ WHERE, pouvant ï¿½tre complï¿½tement vide
+	 * @return les diffï¿½rentes lignes de la table nom, constituï¿½es de taille valeurs.
+	 * Dans le cadre de votre projet, vous pourrez utiliser les mï¿½thodes prï¿½dï¿½finies afin de mieux contrï¿½ler vos types de donnï¿½es 
 	 * exemple :  res.getInt(columnIndex);  res.getString(columnIndex);
 	 * exemple de requete : SELECT * FROM METIER WHERE NOM = 'toto'
 	 * @throws SQLException
@@ -47,15 +47,15 @@ public abstract class SGBD {
 		final byte TAILLE_TABLE = taille;
 		List<List<Object>> rep = new ArrayList<List<Object>>();
 		Statement st = Connexion.getInstance().createStatement() ;
-		// un ResultSet permet de récupérer les différentes lignes obtenues par la requête
+		// un ResultSet permet de rï¿½cupï¿½rer les diffï¿½rentes lignes obtenues par la requï¿½te
 		String requete= "SELECT * FROM "+nom+" "+contrainte;
 		ResultSet res = st.executeQuery(requete) ;
 		System.out.println("getTable : requete = "+requete);
-		// tant que le ResultSet possède des réponses, on le lit
+		// tant que le ResultSet possï¿½de des rï¿½ponses, on le lit
 		while(res.next()){
 			ArrayList<Object> ligne = new ArrayList<Object>(TAILLE_TABLE);
 			// connaitre la taille de la table permet d'automatiser la lecture de chaque attribut du ResultSet,
-			// pour autant, ici, les types lues ne sont pas contrôlés (tout est Object)
+			// pour autant, ici, les types lues ne sont pas contrï¿½lï¿½s (tout est Object)
 			for (int i = 1; i <= TAILLE_TABLE; i++) {
 				ligne.add(res.getObject(i));
 			}
@@ -66,27 +66,27 @@ public abstract class SGBD {
 
 
 	/**
-	 * Permet de supprimer la table nomTable de votre base de données. L'utilisation du mot clé CASCADE vous permettra de
-	 * supprimer vos tables en tenant compte de leurs dépendances.
-	 * @param nomTable : la table à supprimer (ex : METIER)
+	 * Permet de supprimer la table nomTable de votre base de donnï¿½es. L'utilisation du mot clï¿½ CASCADE vous permettra de
+	 * supprimer vos tables en tenant compte de leurs dï¿½pendances.
+	 * @param nomTable : la table ï¿½ supprimer (ex : METIER)
 	 * exemple de requete : DROP TABLE METIER
 	 * @throws SQLException 
 	 */
 	public static void supprimerTable(String nomTable) throws SQLException{
 		Statement st = Connexion.getInstance().createStatement() ;
-		// Lorsque la requête ne retourne pas de tuples, on utilise la méthode de mise à jour.
+		// Lorsque la requï¿½te ne retourne pas de tuples, on utilise la mï¿½thode de mise ï¿½ jour.
 		st.executeUpdate("DROP TABLE "+nomTable) ;
-		System.out.println(nomTable+" supprimée");
+		System.out.println(nomTable+" supprimï¿½e");
 	}
 
 
 	/**
-	 * Méthode permettant d'ajouter une ligne dans votre base de données.
-	 * il est préférable de passer par une méthode utilisant les PreparedStatement.
-	 * @param nomTable : le nom de la table à enrichir ex : METIER
+	 * Mï¿½thode permettant d'ajouter une ligne dans votre base de donnï¿½es.
+	 * il est prï¿½fï¿½rable de passer par une mï¿½thode utilisant les PreparedStatement.
+	 * @param nomTable : le nom de la table ï¿½ enrichir ex : METIER
 	 * @param attributs : les attributs de cette table ex : [NOM, VILLE]
-	 * @param valeurs : une ligne de valeur, dans le même ordre que les attributs ex : ['secrétaire', 'Bruz']
-	 * exemple de requete : INSERT INTO METIER (NOM, VILLE) VALUES ('secrétaire', 'Bruz')
+	 * @param valeurs : une ligne de valeur, dans le mï¿½me ordre que les attributs ex : ['secrï¿½taire', 'Bruz']
+	 * exemple de requete : INSERT INTO METIER (NOM, VILLE) VALUES ('secrï¿½taire', 'Bruz')
 	 * @throws SQLException 
 	 */
 	public static void insererTuple(String nomTable, ArrayList<String> attributs, ArrayList<String> valeurs) throws SQLException{
@@ -109,13 +109,13 @@ public abstract class SGBD {
 				}
 			}
 			requete+=")";
-			System.out.println("insérerTuple : requete = "+requete);
+			System.out.println("insï¿½rerTuple : requete = "+requete);
 			PreparedStatement pst=null;
 			pst = Connexion.getInstance().prepareStatement(requete);
 			/*
-			 * La méthode prepareStatement(requete) peut utiliser une requete acceptant des paramètres.
-			 * C'est ce genre de requête que vous utiliserez vous.
-			 * Regardez la méthode insererTuple() présentée ci-dessous.
+			 * La mï¿½thode prepareStatement(requete) peut utiliser une requete acceptant des paramï¿½tres.
+			 * C'est ce genre de requï¿½te que vous utiliserez vous.
+			 * Regardez la mï¿½thode insererTuple() prï¿½sentï¿½e ci-dessous.
 			 */
 			insererTuple(pst);
 		}
@@ -123,15 +123,15 @@ public abstract class SGBD {
 	}
 
 	/**
-	 * Cette méthode insère un tuple en dur, elle vous sert d'exemple pour voir comment peuvent
-	 * être manipulés les PreparedStatement
+	 * Cette mï¿½thode insï¿½re un tuple en dur, elle vous sert d'exemple pour voir comment peuvent
+	 * ï¿½tre manipulï¿½s les PreparedStatement
 	 * @throws SQLException 
 	 */
 	public static void insererTuple() throws SQLException {
 		PreparedStatement pst = null;
 		String requete = "INSERT INTO METIER (NOM, VILLE) VALUES (?, ?)";			
 		pst = Connexion.getInstance().prepareStatement(requete);
-		pst.setString(1, "un métier original");
+		pst.setString(1, "un mï¿½tier original");
 		pst.setString(2, "L\'yon");
 
 		insererTuple(pst);
@@ -139,7 +139,7 @@ public abstract class SGBD {
 	}
 
 	/**
-	 * Cette méthode met en commun le code d'exécution du PreparedStatement, avec le bloc try catch adéquat.
+	 * Cette mï¿½thode met en commun le code d'exï¿½cution du PreparedStatement, avec le bloc try catch adï¿½quat.
 	 * @param pst
 	 * @throws SQLException 
 	 */
@@ -150,10 +150,10 @@ public abstract class SGBD {
 
 	/**
 	 * 
-	 * @param nomTable : le nom de la table à modifier ex : METIER
-	 * @param modification : la modification à opérer ex : VILLE = 'Bain' 
-	 * @param critere : le critère permettant d'identifier la ligne à modifier ex : NOM = 'secrétaire'
-	 * exemple de requete : UPDATE METIER SET VILLE = 'Bain' WHERE NOM = 'secrétaire'
+	 * @param nomTable : le nom de la table ï¿½ modifier ex : METIER
+	 * @param modification : la modification ï¿½ opï¿½rer ex : VILLE = 'Bain' 
+	 * @param critere : le critï¿½re permettant d'identifier la ligne ï¿½ modifier ex : NOM = 'secrï¿½taire'
+	 * exemple de requete : UPDATE METIER SET VILLE = 'Bain' WHERE NOM = 'secrï¿½taire'
 	 * @throws SQLException 
 	 */
 	public static void modifierTuple(String nomTable, String modification, String critere) throws SQLException{
@@ -167,8 +167,8 @@ public abstract class SGBD {
 	/**
 	 * 
 	 * @param nomTable : le nom de la table qui va perdre une ligne (ex : METIER)
-	 * @param critere : le critère permettant d'identifier la ligne à supprimer ex : NOM = 'secrétaire'
-	 * exemple de requete : DELETE FROM METIER WHERE NOM = 'secrétaire'
+	 * @param critere : le critï¿½re permettant d'identifier la ligne ï¿½ supprimer ex : NOM = 'secrï¿½taire'
+	 * exemple de requete : DELETE FROM METIER WHERE NOM = 'secrï¿½taire'
 	 * @throws SQLException 
 	 */
 	public static void supprimerTuple(String nomTable, String critere) throws SQLException{

@@ -1,4 +1,4 @@
-package fr.mma.outils.model;
+package fr.ensai.outils.model;
 
 public class Livre {
 
